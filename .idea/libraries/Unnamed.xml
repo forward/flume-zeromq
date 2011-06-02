@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Unnamed">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/vendor/zmq.jar!/" />
+      <root url="jar://$PROJECT_DIR$/vendor/flume-0.9.3-core.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

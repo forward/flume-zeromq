@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="flume-zeromq" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+  </patternset>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.unnamed.classpath">
+    <pathelement location="${basedir}/vendor/flume-0.9.3-core.jar"/>
+    <pathelement location="${basedir}/vendor/zmq.jar"/>
+  </path>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module Flume-zeromq -->
+  
+  <dirname property="module.flume-zeromq.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.flume-zeromq" value="${compiler.args}"/>
+  
+  <property name="flume-zeromq.output.dir" value="${module.flume-zeromq.basedir}/out/production/Flume-zeromq"/>
+  <property name="flume-zeromq.testoutput.dir" value="${module.flume-zeromq.basedir}/out/test/Flume-zeromq"/>
+  
+  <path id="flume-zeromq.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="flume-zeromq.module.production.classpath">
+    <path refid="library.unnamed.classpath"/>
+  </path>
+  
+  <path id="flume-zeromq.runtime.production.module.classpath">
+    <pathelement location="${flume-zeromq.output.dir}"/>
+    <path refid="library.unnamed.classpath"/>
+  </path>
+  
+  <path id="flume-zeromq.module.classpath">
+    <pathelement location="${flume-zeromq.output.dir}"/>
+    <path refid="library.unnamed.classpath"/>
+  </path>
+  
+  <path id="flume-zeromq.runtime.module.classpath">
+    <pathelement location="${flume-zeromq.testoutput.dir}"/>
+    <pathelement location="${flume-zeromq.output.dir}"/>
+    <path refid="library.unnamed.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.flume-zeromq">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.flume-zeromq">
+    <patternset refid="excluded.from.module.flume-zeromq"/>
+  </patternset>
+  
+  <path id="flume-zeromq.module.sourcepath">
+    <dirset dir="${module.flume-zeromq.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.flume-zeromq" depends="compile.module.flume-zeromq.production,compile.module.flume-zeromq.tests" description="Compile module Flume-zeromq"/>
+  
+  <target name="compile.module.flume-zeromq.production" description="Compile module Flume-zeromq; production classes">
+    <mkdir dir="${flume-zeromq.output.dir}"/>
+    <javac destdir="${flume-zeromq.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.flume-zeromq}"/>
+      <bootclasspath refid="flume-zeromq.module.bootclasspath"/>
+      <classpath refid="flume-zeromq.module.production.classpath"/>
+      <src refid="flume-zeromq.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.flume-zeromq"/>
+    </javac>
+    
+    <copy todir="${flume-zeromq.output.dir}">
+      <fileset dir="${module.flume-zeromq.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.flume-zeromq.tests" depends="compile.module.flume-zeromq.production" description="compile module Flume-zeromq; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.flume-zeromq" description="cleanup module">
+    <delete dir="${flume-zeromq.output.dir}"/>
+    <delete dir="${flume-zeromq.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.flume-zeromq" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.flume-zeromq" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.flume-zeromq:jar" value="${basedir}/out/artifacts/flume_zeromq_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.flume_zeromq.jar" value="${artifacts.temp.dir}/flume_zeromq.jar"/>
+  </target>
+  
+  <target name="artifact.flume-zeromq:jar" depends="init.artifacts, compile.module.flume-zeromq" description="Build &apos;flume-zeromq:jar&apos; artifact">
+    <property name="artifact.temp.output.flume-zeromq:jar" value="${artifacts.temp.dir}/flume_zeromq_jar"/>
+    <mkdir dir="${artifact.temp.output.flume-zeromq:jar}"/>
+    <jar destfile="${temp.jar.path.flume_zeromq.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${flume-zeromq.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.flume_zeromq.jar}" tofile="${artifact.temp.output.flume-zeromq:jar}/flume_zeromq.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.flume-zeromq:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.flume-zeromq:jar}"/>
+    <copy todir="${artifact.output.flume-zeromq:jar}">
+      <fileset dir="${artifact.temp.output.flume-zeromq:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
