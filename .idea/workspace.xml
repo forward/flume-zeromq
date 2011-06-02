@@ -71,7 +71,7 @@
       <file leaf-file-name="ZeromqSink.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/uk/co/forward/flume/sink/ZeromqSink.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="2" selection-start="1239" selection-end="1239" vertical-scroll-proportion="0.89312977">
+            <state line="72" column="1" selection-start="1918" selection-end="1918" vertical-scroll-proportion="0.9541985">
               <folding />
             </state>
           </provider>
@@ -392,7 +392,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/uk/co/forward/flume/sink/ZeromqSink.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="2" selection-start="1239" selection-end="1239" vertical-scroll-proportion="0.89312977">
+        <state line="72" column="1" selection-start="1918" selection-end="1918" vertical-scroll-proportion="0.9541985">
           <folding />
         </state>
       </provider>

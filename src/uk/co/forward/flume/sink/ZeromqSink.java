@@ -28,14 +28,13 @@ public class ZeromqSink extends EventSink.Base {
     this.context = ZMQ.context(1);
     this.publisher = context.socket(ZMQ.PUB);
     this.publisher.bind("tcp://*:"+this.port);
-    this.publisher.send("Opened ZeroMQ Socket".getBytes(), 0);
   }
   
   @Override
   public void append(Event e) throws IOException, InterruptedException {
-    byte[] bucket = e.getAttrs().get("bucket");
     String body = new String(e.getBody());
 
+    byte[] bucket = e.getAttrs().get("bucket");
     if (bucket != null) {
         body = new String(bucket) + ":" + body;
     }
