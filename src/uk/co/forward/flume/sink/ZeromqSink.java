@@ -46,6 +46,7 @@ public class ZeromqSink extends EventSink.Base {
   @Override
   public void close() throws IOException {
     this.publisher.close();
+    this.context.term();
   }
   
   public static SinkBuilder builder() {
