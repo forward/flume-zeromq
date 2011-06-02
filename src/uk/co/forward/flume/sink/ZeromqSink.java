@@ -28,14 +28,19 @@ public class ZeromqSink extends EventSink.Base {
     this.context = ZMQ.context(1);
     this.publisher = context.socket(ZMQ.PUB);
     this.publisher.bind("tcp://*:"+this.port);
+    this.publisher.send("Opened ZeroMQ Socket".getBytes(), 0);
   }
   
   @Override
   public void append(Event e) throws IOException, InterruptedException {
-    String bucket = new String(e.getAttrs().get("bucket"));
+    byte[] bucket = e.getAttrs().get("bucket");
     String body = new String(e.getBody());
-    String message = bucket + ":" + body;
-    this.publisher.send(message.getBytes(), 0);
+
+    if (bucket != null) {
+        body = new String(bucket) + ":" + body;
+    }
+
+    this.publisher.send(body.getBytes(), 0);
     super.append(e);
   }
 
@@ -60,10 +65,6 @@ public class ZeromqSink extends EventSink.Base {
     };
   }
   
-  /**
-   * This is a special function used by the SourceFactory to pull in this class
-   * as a plugin source.
-   */
   public static List<Pair<String, SinkBuilder>> getSinkBuilders() {
       List<Pair<String, SinkBuilder>> builders =
               new ArrayList<Pair<String, SinkBuilder>>();
