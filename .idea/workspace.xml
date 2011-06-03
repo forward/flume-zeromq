@@ -67,18 +67,7 @@
       <file leaf-file-name="ZeromqSink.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/uk/co/forward/flume/sink/ZeromqSink.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="0" selection-start="1436" selection-end="1436" vertical-scroll-proportion="0.7251908">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Foo.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/uk/co/forward/flume/sink/Foo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0">
+            <state line="10" column="0" selection-start="174" selection-end="174" vertical-scroll-proportion="0.22900763">
               <folding />
             </state>
           </provider>
@@ -407,19 +396,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/uk/co/forward/flume/sink/Foo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/uk/co/forward/flume/sink/ZeromqSink.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="1436" selection-end="1436" vertical-scroll-proportion="0.7251908">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="10" column="0" selection-start="174" selection-end="174" vertical-scroll-proportion="0.22900763">
+          <folding />
         </state>
       </provider>
     </entry>

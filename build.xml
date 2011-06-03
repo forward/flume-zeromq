@@ -82,22 +82,30 @@
   
   <path id="flume-zeromq.module.production.classpath">
     <path refid="library.unnamed.classpath"/>
+    <pathelement location="${basedir}/vendor/slf4j-api-1.6.1.jar"/>
+    <pathelement location="${basedir}/vendor/slf4j-log4j12-1.6.1.jar"/>
   </path>
   
   <path id="flume-zeromq.runtime.production.module.classpath">
     <pathelement location="${flume-zeromq.output.dir}"/>
     <path refid="library.unnamed.classpath"/>
+    <pathelement location="${basedir}/vendor/slf4j-api-1.6.1.jar"/>
+    <pathelement location="${basedir}/vendor/slf4j-log4j12-1.6.1.jar"/>
   </path>
   
   <path id="flume-zeromq.module.classpath">
     <pathelement location="${flume-zeromq.output.dir}"/>
     <path refid="library.unnamed.classpath"/>
+    <pathelement location="${basedir}/vendor/slf4j-api-1.6.1.jar"/>
+    <pathelement location="${basedir}/vendor/slf4j-log4j12-1.6.1.jar"/>
   </path>
   
   <path id="flume-zeromq.runtime.module.classpath">
     <pathelement location="${flume-zeromq.testoutput.dir}"/>
     <pathelement location="${flume-zeromq.output.dir}"/>
     <path refid="library.unnamed.classpath"/>
+    <pathelement location="${basedir}/vendor/slf4j-api-1.6.1.jar"/>
+    <pathelement location="${basedir}/vendor/slf4j-log4j12-1.6.1.jar"/>
   </path>
   
   
