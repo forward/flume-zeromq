@@ -3,9 +3,12 @@ package uk.co.forward.flume.sink;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.cloudera.flume.handlers.debug.TextFileSink;
 import org.zeromq.ZMQ;
 import com.cloudera.util.Pair;
 import com.cloudera.flume.core.Event;
@@ -14,7 +17,8 @@ import com.cloudera.flume.conf.Context;
 import com.cloudera.flume.conf.SinkFactory.SinkBuilder;
 
 public class ZeromqSink extends EventSink.Base {
-  
+  static final Logger LOG = LoggerFactory.getLogger(TextFileSink.class);
+
   private int port;
   private String valueDecoratorAttr;
     
@@ -31,6 +35,7 @@ public class ZeromqSink extends EventSink.Base {
     this.context = ZMQ.context(1);
     this.publisher = context.socket(ZMQ.PUB);
     this.publisher.bind("tcp://*:"+this.port);
+    LOG.info("0MQ sink successfully opened");
   }
   
   @Override
@@ -49,6 +54,7 @@ public class ZeromqSink extends EventSink.Base {
   public void close() throws IOException {
     this.publisher.close();
     this.context.term();
+    LOG.info("0MQ sink successfully closed");
   }
   
   public static SinkBuilder builder() {
@@ -77,7 +83,7 @@ public class ZeromqSink extends EventSink.Base {
   public static List<Pair<String, SinkBuilder>> getSinkBuilders() {
       List<Pair<String, SinkBuilder>> builders =
               new ArrayList<Pair<String, SinkBuilder>>();
-      builders.add(new Pair<String, SinkBuilder>("zeromqSink", builder()));
+      builders.add(new Pair<String, SinkBuilder>("zmqSink", builder()));
       return builders;
   }
 }

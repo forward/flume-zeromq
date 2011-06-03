@@ -65,7 +65,7 @@
   <!-- Modules -->
   
   
-  <!-- Module Flume-zeromq -->
+  <!-- Module flume-zeromq -->
   
   <dirname property="module.flume-zeromq.basedir" file="${ant.file}"/>
   
@@ -73,8 +73,8 @@
   
   <property name="compiler.args.flume-zeromq" value="${compiler.args}"/>
   
-  <property name="flume-zeromq.output.dir" value="${module.flume-zeromq.basedir}/out/production/Flume-zeromq"/>
-  <property name="flume-zeromq.testoutput.dir" value="${module.flume-zeromq.basedir}/out/test/Flume-zeromq"/>
+  <property name="flume-zeromq.output.dir" value="${module.flume-zeromq.basedir}/out/production/flume-zeromq"/>
+  <property name="flume-zeromq.testoutput.dir" value="${module.flume-zeromq.basedir}/out/test/flume-zeromq"/>
   
   <path id="flume-zeromq.module.bootclasspath">
     <!-- Paths to be included in compilation bootclasspath -->
@@ -116,9 +116,9 @@
   </path>
   
   
-  <target name="compile.module.flume-zeromq" depends="compile.module.flume-zeromq.production,compile.module.flume-zeromq.tests" description="Compile module Flume-zeromq"/>
+  <target name="compile.module.flume-zeromq" depends="compile.module.flume-zeromq.production,compile.module.flume-zeromq.tests" description="Compile module flume-zeromq"/>
   
-  <target name="compile.module.flume-zeromq.production" description="Compile module Flume-zeromq; production classes">
+  <target name="compile.module.flume-zeromq.production" description="Compile module flume-zeromq; production classes">
     <mkdir dir="${flume-zeromq.output.dir}"/>
     <javac destdir="${flume-zeromq.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.flume-zeromq}"/>
@@ -136,7 +136,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.flume-zeromq.tests" depends="compile.module.flume-zeromq.production" description="compile module Flume-zeromq; test classes" unless="skip.tests"/>
+  <target name="compile.module.flume-zeromq.tests" depends="compile.module.flume-zeromq.production" description="compile module flume-zeromq; test classes" unless="skip.tests"/>
   
   <target name="clean.module.flume-zeromq" description="cleanup module">
     <delete dir="${flume-zeromq.output.dir}"/>
@@ -153,24 +153,24 @@
   
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
-    <property name="artifact.output.flume-zeromq:jar" value="${basedir}/out/artifacts/flume_zeromq_jar"/>
+    <property name="artifact.output.flume-zmq:jar" value="${basedir}/out/artifacts/flume_zmq_jar"/>
     <mkdir dir="${artifacts.temp.dir}"/>
-    <property name="temp.jar.path.flume_zeromq.jar" value="${artifacts.temp.dir}/flume_zeromq.jar"/>
+    <property name="temp.jar.path.flume_zmq.jar" value="${artifacts.temp.dir}/flume_zmq.jar"/>
   </target>
   
-  <target name="artifact.flume-zeromq:jar" depends="init.artifacts, compile.module.flume-zeromq" description="Build &apos;flume-zeromq:jar&apos; artifact">
-    <property name="artifact.temp.output.flume-zeromq:jar" value="${artifacts.temp.dir}/flume_zeromq_jar"/>
-    <mkdir dir="${artifact.temp.output.flume-zeromq:jar}"/>
-    <jar destfile="${temp.jar.path.flume_zeromq.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+  <target name="artifact.flume-zmq:jar" depends="init.artifacts, compile.module.flume-zeromq" description="Build &apos;flume-zmq:jar&apos; artifact">
+    <property name="artifact.temp.output.flume-zmq:jar" value="${artifacts.temp.dir}/flume_zmq_jar"/>
+    <mkdir dir="${artifact.temp.output.flume-zmq:jar}"/>
+    <jar destfile="${temp.jar.path.flume_zmq.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
       <zipfileset dir="${flume-zeromq.output.dir}"/>
     </jar>
-    <copy file="${temp.jar.path.flume_zeromq.jar}" tofile="${artifact.temp.output.flume-zeromq:jar}/flume_zeromq.jar"/>
+    <copy file="${temp.jar.path.flume_zmq.jar}" tofile="${artifact.temp.output.flume-zmq:jar}/flume_zmq.jar"/>
   </target>
   
-  <target name="build.all.artifacts" depends="artifact.flume-zeromq:jar" description="Build all artifacts">
-    <mkdir dir="${artifact.output.flume-zeromq:jar}"/>
-    <copy todir="${artifact.output.flume-zeromq:jar}">
-      <fileset dir="${artifact.temp.output.flume-zeromq:jar}"/>
+  <target name="build.all.artifacts" depends="artifact.flume-zmq:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.flume-zmq:jar}"/>
+    <copy todir="${artifact.output.flume-zmq:jar}">
+      <fileset dir="${artifact.temp.output.flume-zmq:jar}"/>
     </copy>
     
     <!-- Delete temporary files -->

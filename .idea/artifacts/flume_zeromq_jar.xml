@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="flume-zeromq:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/flume_zeromq_jar</output-path>
-    <root id="archive" name="flume_zeromq.jar">
-      <element id="module-output" name="flume-zeromq" />
-    </root>
-  </artifact>
-</component>
