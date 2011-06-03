@@ -16,11 +16,14 @@ import com.cloudera.flume.conf.SinkFactory.SinkBuilder;
 public class ZeromqSink extends EventSink.Base {
   
   private int port;
+  private String valueDecoratorAttr;
+    
   private ZMQ.Context context;
   private ZMQ.Socket publisher;
 
-  public ZeromqSink(int port) {
+  public ZeromqSink(int port, String valueDecoratorAttr) {
     this.port = port;
+    this.valueDecoratorAttr = valueDecoratorAttr;
   }
   
   @Override
@@ -32,14 +35,13 @@ public class ZeromqSink extends EventSink.Base {
   
   @Override
   public void append(Event e) throws IOException, InterruptedException {
-    String body = new String(e.getBody());
-
-    byte[] bucket = e.getAttrs().get("bucket");
-    if (bucket != null) {
-        body = new String(bucket) + ":" + body;
+    if (this.valueDecoratorAttr != null) {
+      byte[] channel = e.getAttrs().get(this.valueDecoratorAttr);
+      if (channel != null) {
+        this.publisher.send(channel, ZMQ.SNDMORE);
+      }
     }
-
-    this.publisher.send(body.getBytes(), 0);
+    this.publisher.send(e.getBody(), 0);
     super.append(e);
   }
 
@@ -54,13 +56,20 @@ public class ZeromqSink extends EventSink.Base {
       @Override
       public EventSink build(Context context, String... argv) {
         int port = 5555;
-        if (argv.length >= 1) {
+        String valueDecoratorAttr = null;
+        
+        if (argv.length == 1) {
           port = Integer.parseInt(argv[0]);
           if(port < 1024 || port > 65535) {
             throw new IllegalArgumentException("Illegal Port Specified: "+ argv[0]);
           }
+        } else if (argv.length >= 2) {
+          valueDecoratorAttr = argv[1].trim();
+          if(valueDecoratorAttr.equals("")) {
+            throw new IllegalArgumentException("Value Decorator Attribute cannot be empty");
+          }
         }
-        return new ZeromqSink(port);
+        return new ZeromqSink(port, valueDecoratorAttr);
       }
     };
   }
