@@ -18,6 +18,7 @@ Getting Started
 Follow the instructions to install flume plugins. Basically:
 
 1. Modify your $FLUME_HOME/conf/flume-site.xml:
+
        <!--- ================================================= -->
        <!--- Flume Plugins =================================== -->
        <!--- ================================================= -->
