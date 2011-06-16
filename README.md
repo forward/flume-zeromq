@@ -33,12 +33,12 @@ when flume master and flume nodes are started. (Or, you can drop these jars in t
 
 3. Ensure that java.library.path is set to the directory where the libzmq and libjzmq shared libraries are installed (normally /usr/local/lib on UNIX-like systems) by modifying your $FLUME_HOME/bin/flume-env.sh:
 
-       export JAVA_LIBRARY_PATH=/usr/local/lib:$JAVA_LIBRARY_PATH
+       * export JAVA_LIBRARY_PATH=/usr/local/lib:$JAVA_LIBRARY_PATH
 
 4. Set up a flume data path:
 
-       node: tail("/var/log/syslog") | zmqSink    # binds zeromq to default port 5555
-       node: tail("/var/log/syslog") | zmqSink(5556)    # example of how to specify port
-       node: tail("/var/log/syslog") | zmqSink(5556, "valueDecoratorAttr") # if you provide a value decorator attribute, all flume events tagged with that attribute will be sent on a zeromq channel named after the attribute
+       * node: tail("/var/log/syslog") | zmqSink    # binds zeromq to default port 5555
+       * node: tail("/var/log/syslog") | zmqSink(5556)    # example of how to specify port
+       * node: tail("/var/log/syslog") | zmqSink(5556, "valueDecoratorAttr") # if you provide a value decorator attribute, all flume events tagged with that attribute will be sent on a zeromq channel named after the attribute
 
 5. Enjoy!
